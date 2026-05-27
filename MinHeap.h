@@ -12,10 +12,10 @@ typedef struct TNo {
     struct TNo *dir; 
 } TNo;
 
-typedef struct TreeHeap {
+typedef struct TreeHuff {
     int tamanho;
     TNo **root; 
-} TreeHeap;
+} TreeHuff;
 
 
 #endif
