@@ -17,5 +17,12 @@ typedef struct TreeHuff {
     TNo **root; 
 } TreeHuff;
 
+TNo* criar_no(unsigned char byte, unsigned int frequencia);
+TreeHuff* criar_heap();
+void trocar_nos(TNo **a, TNo** b);
+void min_heapify(TreeHuff* heap, int indice);
+void inserir_min_heap(TreeHuff* heap, TNo* no);
+TNo* extrair_minimo(TreeHuff* heap);
+
 
 #endif
