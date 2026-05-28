@@ -54,7 +54,6 @@ void Codificar(char entrada[], char saida[]){
 
             int j = 0;
             while (dicionario[i][j] != -1) {
-                printf("%d", dicionario[i][j]);
                 bits_totais += frequencia[i];
                 j++;
             }
