@@ -10,7 +10,7 @@
 int main(int argc, char *argv[]){
 
     if(argc != 4){
-        printf("Erro na execução do Programa, (Estrutura =>\n\pPROGRMA / OPERAÇÃO (-c||-d) / ARQUIVO ENTRADA / ARQUIVO SAIDA\n);");
+        printf("Erro na execução do Programa, (Estrutura =>\nPROGRAMA / OPERAÇÃO (-c||-d) / ARQUIVO ENTRADA / ARQUIVO SAIDA)\n");
         return 1;
     }
 
