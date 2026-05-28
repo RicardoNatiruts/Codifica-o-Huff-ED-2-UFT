@@ -47,11 +47,11 @@ void criarCaminho(int** dicionario, int* auxiliar, TNo* root, int cont){
     }
 
     if(root->esq){
-        auxiliar[cont] = 1;
+        auxiliar[cont] = 0;
         criarCaminho(dicionario, auxiliar, root->esq, cont+1);
     }
     if(root->dir){
-        auxiliar[cont] = 0;
+        auxiliar[cont] = 1;
         criarCaminho(dicionario, auxiliar, root->dir, cont+1);
     }
     return;

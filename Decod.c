@@ -33,7 +33,7 @@ void extrair_payload(FILE* arquivo, FILE* saida, TNo* arvore_huff, unsigned char
         byte = next_byte;
     }
 
-    for(int i = 7; i > lixo; i--){
+    for(int i = 7; i >= lixo; i--){
         int bit = (byte >> i) & 1;
 
         if(bit == 0){
