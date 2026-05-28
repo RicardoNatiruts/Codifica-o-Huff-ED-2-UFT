@@ -3,9 +3,9 @@
 
 #include "MinHeap.h"
 
-int** create_dicionario(TreeHuff*);
+int** create_dicionario(TNo*);
 
-TNo* construir_arvore(unsigned int frequencias[256]);
+TNo* construir_arvore(unsigned int frequencias[]);
 
 void gerar_codigos(TNo *raiz, char *caminho, int profundidade, char codigos[256][512]);
 

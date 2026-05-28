@@ -21,6 +21,8 @@ void imprimir_tabela(unsigned int frequencia[]){
     }
 }
 
+
+
 /*
 int main(){
 

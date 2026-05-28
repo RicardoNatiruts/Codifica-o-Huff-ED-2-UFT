@@ -1,12 +1,13 @@
 #include "Huff.h"
 #include "MinHeap.h"
+#include <string.h>
 
 #define TAM_FREQ 256
 
-TNo* construir_arvore(unsigned int frequencias[256]) {
+TNo* construir_arvore(unsigned int frequencias[]) {
     TreeHuff *heap = criar_heap();
 
-    for (int i = 0; i < 256; i++) {
+    for (int i = 0; i < TAM_FREQ; i++) {
         if (frequencias[i] > 0) {
             inserir_min_heap(heap, criar_no((unsigned char)i, frequencias[i]));
         }
@@ -79,21 +80,20 @@ void liberar_arvore(TNo *raiz) {
     free(raiz);
 }
 
-int** create_dicionario(TreeHuff* tree) {
-    
-    // 1. Aloca um vetor de ponteiros (um para cada linha)
+int** create_dicionario(TNo* raiz_arvore) { // Alterado de TreeHuff* para TNo*
     int** dicionario = (int**)malloc(TAM_FREQ * sizeof(int*));
-    
-    // 2. Aloca o vetor de inteiros para cada linha individualmente
     for(int i = 0; i < TAM_FREQ; i++) {
         dicionario[i] = (int*)malloc(TAM_FREQ * sizeof(int));
+        // Inicializa com -1 para sabermos onde o código termina
+        for(int j = 0; j < TAM_FREQ; j++) dicionario[i][j] = -1;
     }
 
-    int* auxilar = (int*)malloc(TAM_FREQ * sizeof(int*));
-    
+    // Correção no sizeof: alocar int, não int*
+    int* auxiliar = (int*)malloc(TAM_FREQ * sizeof(int)); 
     int cont = 0;
 
-    criarCaminho(dicionario, auxilar, tree->root, cont);
+    criarCaminho(dicionario, auxiliar, raiz_arvore, cont); // Passa a raiz correta
     
+    free(auxiliar);
     return dicionario;
 }

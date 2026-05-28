@@ -58,7 +58,7 @@ void inserir_min_heap(TreeHuff* heap, TNo* no){
     heap->tamanho++;
     heap->root[i] = no;
 
-    while (i > 0 && heap->root[i]->frequencia < heap->root[pai]->frequencia) {
+    while (i > 0 && heap->root[i]->frequencia <= heap->root[pai]->frequencia) {
         trocar_nos(&heap->root[i], &heap->root[pai]);
         
         i = pai;
