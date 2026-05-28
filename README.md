@@ -91,4 +91,4 @@ Responsável pela manipulação da estrutura em árvore.
 | **Bíblia.txt** | 4,3 MB | 2,5 MB | Aprox. 41,86% |
 | **LogoMarca** | 456 KB | 457 KB | Aumento de Aprox. 0,22% |
 | **TextoRepetição.txt** | 24 KB | 6 KB | 75% |
-| **Parelelepipedo** | 14 bytes | 50 KB | Aumento de Aprox. 257% |
+| **Parelelepipedo** | 14 bytes | 50 bytes | Aumento de Aprox. 257% |
