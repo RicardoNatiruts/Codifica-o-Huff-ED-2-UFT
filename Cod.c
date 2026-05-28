@@ -1,4 +1,9 @@
 #include "Cod.h"
+#include "Huff.h"
+#include "MinHeap.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
 #define MAX_NOS 256
 
 void preencher_tabela(unsigned int frequencia[], char exemplo[]){
@@ -22,9 +27,20 @@ void imprimir_tabela(unsigned int frequencia[]){
     }
 }
 
-void Codificar(char entrada[], char saida[], int** dicionario, unsigned int frequencia[]){
-    FILE *entrada_arquivo = fopen(entrada, "r");
+void Codificar(char entrada[], char saida[]){
+
+
+    FILE *entrada_arquivo = fopen(entrada, "rb");
     FILE *saida_arquivo = fopen(saida, "wb");
+
+    unsigned int frequencia[MAX_NOS] = {0};
+
+    preencher_tabela(frequencia, entrada);
+    imprimir_tabela(frequencia);
+
+    TNo* arvore = construir_arvore(frequencia);
+    int** dicionario = create_dicionario(arvore);
+
     unsigned int contagem = 0;
     unsigned int bits_totais = 0;
     unsigned int bits_lixo = 0;
@@ -56,7 +72,7 @@ void Codificar(char entrada[], char saida[], int** dicionario, unsigned int freq
         if(frequencia[i] > 0){
             unsigned char caractere = (unsigned char)i;
             fwrite(&caractere, sizeof(unsigned char), 1, saida_arquivo);
-            fwrite(&frequencia[i], sizeof(int), 1, saida_arquivo);
+            fwrite(&frequencia[i], sizeof(unsigned int), 1, saida_arquivo);
         }
     }
     fwrite(&bits_lixo, sizeof(unsigned char), 1, saida_arquivo);

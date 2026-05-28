@@ -6,17 +6,13 @@
 
 int main(){
 
-    unsigned int frequencia[MAX_NOS] = {0};
+    
 
-    preencher_tabela(frequencia, ARQUIVO);
-    imprimir_tabela(frequencia);
+    
 
-    TNo* arvore = construir_arvore(frequencia);
-    int** dicionario = create_dicionario(arvore);
+    Codificar(ARQUIVO, "codificado.huff");
 
-    Codificar(ARQUIVO, "codificado.huff", dicionario, frequencia);
-
-    Decodificar("codificado.huff", "decodificado.huff");
+    Decodificar("codificado.huff", "decodificado.txt");
 
     return 0;
 }

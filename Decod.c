@@ -59,14 +59,14 @@ void Decodificar(char Huff[], char ArquivoSaida[]){
 
     fread(&cont_bytes, sizeof(int), 1, arquivo);
 
-    int frequencia[TAM_FREQ] = {0};
+    unsigned int frequencia[TAM_FREQ] = {0};
 
     for (int i = 0; i < cont_bytes; i++){
         unsigned char caractere;
-        int frequenciaChar;
+        unsigned int frequenciaChar;
 
         fread(&caractere, sizeof(unsigned char), 1, arquivo);
-        fread(&frequenciaChar, sizeof(int), 1, arquivo);
+        fread(&frequenciaChar, sizeof(unsigned int), 1, arquivo);
 
         frequencia[caractere] = frequenciaChar;
     }
