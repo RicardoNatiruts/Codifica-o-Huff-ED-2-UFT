@@ -5,7 +5,10 @@
 
 int main(){
 
+    FILE *arquivo = fopen("codificado.huff", "wb");
+
     unsigned int frequencia[MAX_NOS] = {0};
+    unsigned int contagem = 0;
 
     preencher_tabela(frequencia, ARQUIVO);
     imprimir_tabela(frequencia);
@@ -15,6 +18,7 @@ int main(){
 
     for (int i = 0; i < MAX_NOS; i++) {
         if(frequencia[i] > 0){
+            contagem++;
             printf("Letra '%c': ", i);
         
         
@@ -27,6 +31,16 @@ int main(){
 
         }
     }
+
+    fwrite(&contagem, sizeof(int), 1, arquivo);
+    for(int i = 0; i < MAX_NOS; i++){
+        if(frequencia[i] > 0){
+            unsigned char caractere = (unsigned char)i;
+            fwrite(&caractere, sizeof(char), 1, arquivo);
+            fwrite(&frequencia[i], sizeof(int), 1, arquivo);
+        }
+    }
+    fclose(arquivo);
 
     return 0;
 }
