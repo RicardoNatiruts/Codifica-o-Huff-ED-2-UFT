@@ -1,4 +1,5 @@
 #include "Cod.h"
+#define MAX_NOS 256
 
 void preencher_tabela(unsigned int frequencia[], char exemplo[]){
     FILE *arquivo = fopen(exemplo, "rb");
@@ -21,6 +22,72 @@ void imprimir_tabela(unsigned int frequencia[]){
     }
 }
 
+void Codificar(char entrada[], char saida[], int** dicionario, unsigned int frequencia[]){
+    FILE *entrada_arquivo = fopen(entrada, "r");
+    FILE *saida_arquivo = fopen(saida, "wb");
+    unsigned int contagem = 0;
+    unsigned int bits_totais = 0;
+    unsigned int bits_lixo = 0;
+    unsigned char byte_buffer = 0;
+    int contador_bits = 0;         
+    int c;
+
+    for (int i = 0; i < MAX_NOS; i++) {
+        if(frequencia[i] > 0){
+            contagem++;
+
+            int j = 0;
+            while (dicionario[i][j] != -1) {
+                printf("%d", dicionario[i][j]);
+                bits_totais += frequencia[i];
+                j++;
+            }
+        }
+    }
+
+     if(bits_totais % 8 == 0){
+        bits_lixo = 0;
+    }else{
+        bits_lixo = 8 - (bits_totais%8);
+    }
+
+    fwrite(&contagem, sizeof(int), 1, saida_arquivo);
+    for(int i = 0; i < MAX_NOS; i++){
+        if(frequencia[i] > 0){
+            unsigned char caractere = (unsigned char)i;
+            fwrite(&caractere, sizeof(unsigned char), 1, saida_arquivo);
+            fwrite(&frequencia[i], sizeof(int), 1, saida_arquivo);
+        }
+    }
+    fwrite(&bits_lixo, sizeof(unsigned char), 1, saida_arquivo);
+
+    while ((c = fgetc(entrada_arquivo)) != EOF) {
+        
+        int j = 0;
+        while (dicionario[c][j] != -1) {
+            int bit = dicionario[c][j];
+
+            byte_buffer = (byte_buffer << 1) | bit;
+            contador_bits++;
+
+            if (contador_bits == 8) {
+                fwrite(&byte_buffer, sizeof(unsigned char), 1, saida_arquivo);
+                byte_buffer = 0;    
+                contador_bits = 0;   
+            }
+            j++;
+        }
+    }
+
+    if (contador_bits > 0) {
+        byte_buffer = byte_buffer << bits_lixo;
+        fwrite(&byte_buffer, sizeof(unsigned char), 1, saida_arquivo);
+    }
+    
+
+    fclose(entrada_arquivo);
+    fclose(saida_arquivo);
+}
 
 
 /*
