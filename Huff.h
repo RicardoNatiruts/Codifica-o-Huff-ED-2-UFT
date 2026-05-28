@@ -5,10 +5,8 @@
 
 int** create_dicionario(TNo*);
 
-TNo* construir_arvore(unsigned int frequencias[]);
+TNo* construir_arvore(unsigned int[]);
 
-void gerar_codigos(TNo *raiz, char *caminho, int profundidade, char codigos[256][512]);
-
-void liberar_arvore(TNo *raiz);
+void liberar_arvore(TNo*);
 
 #endif

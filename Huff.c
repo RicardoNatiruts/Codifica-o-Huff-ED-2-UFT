@@ -57,42 +57,17 @@ void criarCaminho(int** dicionario, int* auxiliar, TNo* root, int cont){
     return;
 }
 
-void gerar_codigos(TNo *raiz, char *caminho, int profundidade, char codigos[256][512]) {
-    if (!raiz) return;
-
-    if (!raiz->esq && !raiz->dir) {
-        caminho[profundidade] = '\0';
-        strncpy(codigos[raiz->byte], caminho, 511);
-        return;
-    }
-
-    caminho[profundidade] = '0';
-    gerar_codigos(raiz->esq, caminho, profundidade + 1, codigos);
-
-    caminho[profundidade] = '1';
-    gerar_codigos(raiz->dir, caminho, profundidade + 1, codigos);
-}
-
-void liberar_arvore(TNo *raiz) {
-    if (!raiz) return;
-    liberar_arvore(raiz->esq);
-    liberar_arvore(raiz->dir);
-    free(raiz);
-}
-
-int** create_dicionario(TNo* raiz_arvore) { // Alterado de TreeHuff* para TNo*
+int** create_dicionario(TNo* root) { 
     int** dicionario = (int**)malloc(TAM_FREQ * sizeof(int*));
     for(int i = 0; i < TAM_FREQ; i++) {
         dicionario[i] = (int*)malloc(TAM_FREQ * sizeof(int));
-        // Inicializa com -1 para sabermos onde o código termina
         for(int j = 0; j < TAM_FREQ; j++) dicionario[i][j] = -1;
     }
 
-    // Correção no sizeof: alocar int, não int*
     int* auxiliar = (int*)malloc(TAM_FREQ * sizeof(int)); 
     int cont = 0;
 
-    criarCaminho(dicionario, auxiliar, raiz_arvore, cont); // Passa a raiz correta
+    criarCaminho(dicionario, auxiliar, root, cont); 
     
     free(auxiliar);
     return dicionario;
