@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
     }
     else if(strcmp(argv[1], "-d") == 0){
         Decodificar(argv[2], argv[3]);
-        printf("Arquivo decompactado");
+        printf("Arquivo descompactado");
     }
     else{
         printf("Erro: Flag '%s' desconhecida.\n", argv[1]);
